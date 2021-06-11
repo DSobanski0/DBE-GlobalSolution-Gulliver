@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="title">Home</ui:define>
+	<ui:define name="content">
+
+		<div class="card product">
+			<h:form id="form">
+				<p:dataView var="parque" 
+							value="#{parqueBean.parques}" 
+							rows="6" paginator="true" 
+							rowsPerPageTemplate="6,12,16"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+					<p:dataViewGridItem>
+						<div class="parque-grid-item card border-1">
+							<div class="parque-grid-item-top">
+								<div>
+								Horário de funcionamento:
+									<span class="parque-category">#{parque.abertura} -</span>
+									<span class="parque-category">#{parque.fechamento}</span>
+								</div>
+							</div>
+							<div class="parque-grid-item-content">
+								<p:graphicImage name="demo/images/product/" />
+								<div class="parque-name">#{parque.nome}</div>
+								<div class="parque-description">#{parque.descricao}</div>
+								<p:rating value="0" />
+							</div>
+							<div class="parque-grid-item-bottom">
+								<h:outputText value="CEP: #{parque.cep}" styleClass="parque-endereco"/>
+								<p:commandButton type="button" value="Detalhes"	icon="pi pi-search">
+								</p:commandButton>
+							</div>
+						</div>
+					</p:dataViewGridItem>
+
+					<p:dataViewListItem>
+						<div class="parque-list-item">
+							<p:graphicImage name="demo/images/product/" />
+							<div class="parque-list-detail">
+								<div class="parque-name">#{parque.nome}</div>
+								<div class="parque-description">#{parque.descricao}</div>
+								<p:rating value="0" />
+								Horário de funcionamento:
+								<span class="parque-category">#{parque.abertura} -</span>
+								<span class="parque-category">#{parque.fechamento}</span>
+							</div>
+							<div class="parque-list-action">
+							
+								<h:outputText  value="CEP: #{parque.cep}" styleClass="parque-endereco"/>
+								<p:commandButton type="button" value="Detalhes" icon="pi pi-search">
+								</p:commandButton>
+							</div>
+						</div>
+					</p:dataViewListItem>
+					
+				</p:dataView>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

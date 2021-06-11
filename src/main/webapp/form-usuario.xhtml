@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="content">
+		<p:messages id="messages">
+			<p:autoUpdate />
+		</p:messages>
+
+		<h:form>
+			<p:card class="card-form">
+				<f:facet name="title">
+	      			Novo Usuário
+	    		</f:facet>
+
+				<div class="p-field p-grid">
+					<p:outputLabel value="Nome" for="nome" class="p-col-fixed" style="width: 100px"/>
+					<div class="p-col">
+						<p:inputText class="input-form" id="nome" type="text"
+							value="#{usuarioBean.usuario.nome}" required="true">
+							<f:ajax event="blur" render="messages" />
+						</p:inputText>
+					</div>
+				</div>
+
+				<div class="p-field p-grid">
+					<p:outputLabel for="nascimento" value="Nascimento" style="width: 100px"/>
+					<div class="p-col">
+						<p:calendar id="nascimento"
+							value="#{usuarioBean.usuario.nascimento}" required="true"
+							showOn="button" mask="true" pattern="dd/MM/yyyy">
+							<f:ajax event="blur" render="messages" />
+						</p:calendar>
+					</div>
+				</div>
+
+				<div class="p-field p-grid">
+					<p:outputLabel for="email" value="E-mail" style="width: 100px"/>
+					<div class="p-col">
+						<p:inputText id="email" value="#{usuarioBean.usuario.email}"
+							required="true" validatorMessage="E-mail inválido">
+							<f:ajax event="blur" render="messages" />
+							<f:validateRegex
+								pattern="^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$" />
+						</p:inputText>
+					</div>
+				</div>
+
+				<div class="p-field p-grid">
+					<p:outputLabel for="senha" value="Senha" style="width: 100px"/>
+					<div class="p-col">
+						<p:password id="senha" value="#{usuarioBean.usuario.senha}"
+							required="true" toggleMask="true" feedback="true"
+							weakLabel="fraca" strongLabel="forte">
+							<f:ajax event="blur" render="messages" />
+						</p:password>
+					</div>
+				</div>
+
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Salvar"
+						action="#{usuarioBean.salvar}" update="table-usuario">
+						<p:ajax execute="@form" />
+					</p:commandButton>
+					<p:commandButton icon="pi pi-times" value="Cancelar"
+						styleClass="ui-button-secondary" style="margin-left: .5em" />
+				</f:facet>
+			</p:card>
+			<div class="card">
+				<p:dataTable var="usuario" value="#{usuarioBean.usuarios}" id="table-usuario">
+					<p:column headerText="Nome">
+						<h:outputText value="#{usuario.nome}" />
+					</p:column>
+		            <p:column headerText="Nascimento">
+		                <h:outputText value="#{usuario.nascimento}">
+		                	<f:convertDateTime locale="pt_BR" dateStyle="short" /> 
+		                </h:outputText>
+		            </p:column>
+					<p:column headerText="Email">
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+				</p:dataTable>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

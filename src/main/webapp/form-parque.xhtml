@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="content">
+		<p:messages id="messages">
+			<p:autoUpdate />
+		</p:messages>
+		<h:form>
+			<p:card class="card-form">
+				<f:facet name="title">
+	       			Novo Parque
+	    		</f:facet>
+				<div class="p-field p-grid">
+					<p:outputLabel value="Nome" for="nome" class="p-col-fixed" style="width: 100px"/>
+					<div class="p-col">
+						<p:inputText class="input-form" id="nome" type="text"
+							value="#{parqueBean.parque.nome}" required="true">
+							<f:ajax event="blur" render="messages" />
+						</p:inputText>
+					</div>
+				</div>
+				<div class="p-field p-grid">
+					<p:outputLabel for="abertura" class="p-col-fixed" value="Abertura"
+						style="width: 100px" />
+					<div class="p-col">
+						<p:datePicker class="input-form" id="abertura"
+							value="#{parqueBean.parque.abertura}" timeInput="true"
+							required="true" converterMessage="Abertura deve ser um horário">
+							<f:ajax event="blur" render="messages" />
+						</p:datePicker>
+					</div>
+				</div>
+				<div class="p-field p-grid">
+					<p:outputLabel for="fechamento" class="p-col-fixed"
+						value="Fechamento" style="width: 100px" />
+					<div class="p-col">
+						<p:datePicker id="fechamento"
+							value="#{parqueBean.parque.fechamento}" timeInput="true"
+							required="true" converterMessage="Fechamento deve ser um horário">
+							<f:ajax event="blur" render="messages" />
+						</p:datePicker>
+					</div>
+				</div>
+				<div class="p-field p-grid">
+					<p:outputLabel value="CEP" for="cep" class="p-col-fixed" style="width: 100px"/>
+					<div class="p-col">
+						<p:inputText class="input-form" id="cep"
+							value="#{parqueBean.parque.cep}" required="true"
+							validatorMessage="O campo CEP deve ter 8 caracteres"
+							converterMessage="CEP deve ser um número">
+							<f:validateLength minimum="8" maximum="8" />
+							<f:ajax event="blur" render="messages" />
+						</p:inputText>
+					</div>
+				</div>
+				<div class="p-field p-grid">
+					<p:outputLabel value="Descrição" for="descricao" class="p-col-fixed" style="width: 100px"/>
+					<div class="p-col">
+						<p:inputTextarea class="input-form" id="descricao"
+							value="#{parqueBean.parque.descricao}"
+							validatorMessage="O campo descrição deve ter no mínimo 10 e no máximo 255 caracteres"
+							required="true">
+							<f:validateLength minimum="10" maximum="255" />
+							<f:ajax event="blur" render="messages" />
+						</p:inputTextarea>
+					</div>
+				</div>
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Salvar"
+						action="#{parqueBean.salvar}" update="table-parque">
+						<p:ajax execute="@form" />
+					</p:commandButton>
+					<p:commandButton icon="pi pi-times" value="Cancelar"
+						styleClass="ui-button-secondary" style="margin-left: .5em" />
+				</f:facet>
+			</p:card>
+
+			<div class="card">
+				<p:dataTable var="parque" value="#{parqueBean.parques}"
+					id="table-parque">
+					<p:column headerText="Nome">
+						<h:outputText value="#{parque.nome}" />
+					</p:column>
+					<p:column headerText="Abertura">
+						<h:outputText value="#{parque.abertura}" />
+					</p:column>
+					<p:column headerText="Fechamento">
+						<h:outputText value="#{parque.fechamento}" />
+					</p:column>
+				</p:dataTable>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

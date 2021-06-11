@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+body{
+	background: #ddd;
+}
+
+.card-form{
+	width: 30em;
+	margin: 1em auto;
+}
+
+.p-grid, .p-grid>div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.2em;
+}
+
+.p-col{
+	display: flex;
+	flex-direction: column;
+}
+
+input{
+	width: 300px;
+}
+
+textarea{
+	width: 300px;
+}
+
+.parque-list-item {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.parque-list-detail {
+    flex: 1 1 0;
+    -ms-flex: 1 1 0;
+}
+
+.parque-name{
+	font-size: 1rem;
+    font-weight: 700;
+}
+
+.parque-description {
+    margin: 0 0 1rem 0;
+}
+
+.parque-list-action {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.parque-endereco {
+    margin-bottom: .5rem;
+    align-self: flex-end;
+}
+
+.parque-grid-item.border-1 {
+    border: 1px solid var(--surface-d);
+    padding: 2rem;
+}
+
+.parque-grid-item-top {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
+}
+
+.parque-grid-item-bottom {
+	display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;	
+}
+
+.parque-grid-item-content {
+    text-align: center;
+}
